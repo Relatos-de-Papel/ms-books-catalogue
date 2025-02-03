@@ -3,7 +3,6 @@ package com.unir.books.service;
 import com.unir.books.controller.model.CreateCategoryRequest;
 import com.unir.books.data.CategoryRepository;
 import com.unir.books.data.model.Category;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

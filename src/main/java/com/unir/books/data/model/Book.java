@@ -1,7 +1,6 @@
 package com.unir.books.data.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.unir.books.data.utils.Consts;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
@@ -27,16 +26,16 @@ public class Book {
     private String name;
 
 
-    @ManyToOne
-    @JoinColumn(name = "author_Id", insertable = false, updatable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_Id" )
     private Author author;
 
-    @ManyToOne
-    @JoinColumn(name = "category_Id", insertable = false, updatable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_Id")
     private Category category;
 
-    @ManyToOne
-    @JoinColumn(name = "editorial_Id", insertable = false, updatable = false)
+    @ManyToOne( cascade = CascadeType.ALL)
+    @JoinColumn(name = "editorial_Id")
     private Editorial editorial;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
@@ -46,18 +45,18 @@ public class Book {
 
 
     @Column(name ="unitPrice")
-    private Double unitPrice;
+    private Long unitPrice;
 
     @Column(name ="ISBN")
     private String ISBN;
 
     @Column(name ="stock")
-    private Integer stock;
+    private Long stock;
 
-    @Column(name ="status")
-    private String status;
+    @Column(name ="is_Active")
+    private boolean isActive;
 
-    @Column(name ="datePublished")
+    @Column(name ="date_Published")
     private Date datePublished;
 
     @Column(name ="ranking")
@@ -65,5 +64,9 @@ public class Book {
 
     @Column(name ="type")
     private String type;
+
+    @Column(name ="visible")
+    private boolean visible;
+
 
 }

@@ -1,5 +1,7 @@
 package com.unir.books.controller.model;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +16,12 @@ public class CreateBookRequest {
         private Long authorId;
         private Long categoryId;
         private Long editorialId;
-        private String ISBN;
+        private String isbn;
+        private Long stock;
+        private long unitPrice;
+        private Date datePublished;
+        private String type;
 }
+
+
 

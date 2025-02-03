@@ -3,7 +3,6 @@ package com.unir.books.service;
 import com.unir.books.controller.model.CreateEditorialRequest;
 import com.unir.books.data.EditorialRepository;
 import com.unir.books.data.model.Editorial;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

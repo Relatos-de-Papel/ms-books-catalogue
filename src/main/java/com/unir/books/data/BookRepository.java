@@ -1,8 +1,6 @@
 package com.unir.books.data;
 
 import com.unir.books.data.model.Book;
-import com.unir.books.data.model.Product;
-import com.unir.books.data.utils.Consts;
 import com.unir.books.data.utils.SearchCriteria;
 import com.unir.books.data.utils.SearchOperation;
 import com.unir.books.data.utils.SearchStatement;
@@ -10,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -30,11 +29,15 @@ public class BookRepository {
         return repository.save(book);
     }
 
+    public Book update(Book book) {
+        return repository.save(book);
+    }
+
     public void delete(Book book) {
         repository.delete(book);
     }
 
-    public List<Book> search(String name, String author, String category, String ISBN) {
+    public List<Book> search(String name, String author, String category, String ISBN, Date datePublished) {
         SearchCriteria<Book> spec = new SearchCriteria<>();
 
         if (StringUtils.isNotBlank(name)) {
@@ -52,6 +55,11 @@ public class BookRepository {
         if (ISBN != null) {
             spec.add(new SearchStatement("isbn", ISBN, SearchOperation.EQUAL));
         }
+
+        if (datePublished != null) {
+            spec.add(new SearchStatement("datePublished", datePublished, SearchOperation.EQUAL));
+        }
+        spec.add(new SearchStatement("visible", true, SearchOperation.EQUAL));
 
         return repository.findAll(spec);
     }
