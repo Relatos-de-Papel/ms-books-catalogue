@@ -60,6 +60,7 @@ public class BookRepository {
             spec.add(new SearchStatement("datePublished", datePublished, SearchOperation.EQUAL));
         }
         spec.add(new SearchStatement("visible", true, SearchOperation.EQUAL));
+        spec.add(new SearchStatement("isActive", true, SearchOperation.EQUAL));
 
         return repository.findAll(spec);
     }

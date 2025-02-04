@@ -27,6 +27,31 @@
 			"response": []
 		},
 		{
+			"name": "get books with filters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/books?title=\"cien años de soledad\"",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "\"cien años de soledad\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "get book by id",
 			"request": {
 				"method": "GET",
