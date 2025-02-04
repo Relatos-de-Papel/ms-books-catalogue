@@ -24,22 +24,20 @@ import java.util.List;
 
 public class BookServiceImp implements  BooksService{
 
+    private final BookRepository repository;
+    private final AuthorService authorService;
+    private final CategoryService categoryService;
+    private final EditorialService editorialService;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    private BookRepository repository;
-
-    @Autowired
-    private AuthorService authorService;
-
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private EditorialService editorialService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
+    public BookServiceImp(BookRepository repository, AuthorService authorService, CategoryService categoryService, EditorialService editorialService, ObjectMapper objectMapper) {
+        this.repository = repository;
+        this.authorService = authorService;
+        this.categoryService = categoryService;
+        this.editorialService = editorialService;
+        this.objectMapper = objectMapper;
+    }
     @Override
     public List<Book> getBooks(String name, String author, String category, String ISBN, Date datePublished,Integer ranking)
     {
@@ -109,7 +107,7 @@ public class BookServiceImp implements  BooksService{
     @Override
     public Book updateBook(Long bookId, String request) {
 
-        Book book = repository.getById(Long.valueOf(bookId));
+        Book book = repository.getById(bookId);
         if (book != null) {
             try {
                 JsonMergePatch jsonMergePatch = JsonMergePatch.fromJson(objectMapper.readTree(request));
@@ -128,33 +126,32 @@ public class BookServiceImp implements  BooksService{
 
     @Override
     public Book updateBook(Long bookId, BookDto updateRequest) {
-        Book book = repository.getById(Long.valueOf(bookId));
+        Book book = repository.getById(bookId);
         
        
        
        
                if (book != null) {
-                var bookToSave = bookDtoToBook(updateRequest);
+                var bookToSave = bookDtoToBook(book,updateRequest);
                    return repository.save(bookToSave);
                } else {
                    return null;
                }
            }
        
-           private Book bookDtoToBook(BookDto updateRequest) {
-               
-                return Book.builder()
-                          .name(updateRequest.getName())
-                          .author(authorService.getAuthorById(updateRequest.getAuthorId()))
-                          .category(categoryService.getCategoryById(updateRequest.getCategoryId()))
-                          .editorial(editorialService.getEditorialById(updateRequest.getEditorialId()))
-                          .ISBN(updateRequest.getISBN())
-                          .stock(updateRequest.getStock())
-                          .unitPrice(updateRequest.getUnitPrice())
-                          .datePublished(updateRequest.getDatePublished())
-                          .type(updateRequest.getType())
-                          .visible(true)
-                          .build();
+           private Book bookDtoToBook(Book book,BookDto updateRequest) {
+
+               book.setName(updateRequest.getName());
+                book.setAuthor(authorService.getAuthorById(updateRequest.getAuthorId()));
+                book.setCategory(categoryService.getCategoryById(updateRequest.getCategoryId()));
+                book.setEditorial(editorialService.getEditorialById(updateRequest.getEditorialId()));
+                book.setISBN(updateRequest.getISBN());
+                book.setStock(updateRequest.getStock());
+                book.setUnitPrice(updateRequest.getUnitPrice());
+                book.setDatePublished(updateRequest.getDatePublished());
+                book.setType(updateRequest.getType());
+                return book;
+
            }
        
            @Override

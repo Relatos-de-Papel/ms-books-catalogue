@@ -13,8 +13,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-04T11:06:17-0500",
-    comments = "version: 1.4.2.Final, compiler: Eclipse JDT (IDE) 3.41.0.z20250115-2156, environment: Java 21.0.5 (Eclipse Adoptium)"
+    date = "2025-02-04T11:24:02-0500",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 23.0.1 (Homebrew)"
 )
 public class BookMapperImpl implements BookMapper {
 
@@ -31,10 +31,10 @@ public class BookMapperImpl implements BookMapper {
         bookDto.setEditorialId( bookEditorialId( book ) );
         bookDto.setISBN( book.getISBN() );
         bookDto.setStock( book.getStock() );
-        bookDto.setDatePublished( book.getDatePublished() );
         bookDto.setName( book.getName() );
-        bookDto.setType( book.getType() );
         bookDto.setUnitPrice( book.getUnitPrice() );
+        bookDto.setDatePublished( book.getDatePublished() );
+        bookDto.setType( book.getType() );
         bookDto.setVisible( book.isVisible() );
 
         return bookDto;
@@ -52,11 +52,11 @@ public class BookMapperImpl implements BookMapper {
         book.category( bookDtoToCategory( bookDto ) );
         book.editorial( bookDtoToEditorial( bookDto ) );
         book.ISBN( bookDto.getISBN() );
-        book.datePublished( bookDto.getDatePublished() );
         book.name( bookDto.getName() );
-        book.stock( bookDto.getStock() );
-        book.type( bookDto.getType() );
         book.unitPrice( bookDto.getUnitPrice() );
+        book.stock( bookDto.getStock() );
+        book.datePublished( bookDto.getDatePublished() );
+        book.type( bookDto.getType() );
         book.visible( bookDto.isVisible() );
 
         return book.build();

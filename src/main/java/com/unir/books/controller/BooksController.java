@@ -44,7 +44,7 @@ public class BooksController {
     @Operation(
             operationId = "getBooks",
             description = "Obtiene una lista de libros dependiendo los parametros de busqueda",
-            summary = "Get all books")
+            summary = "Obtiene todos los libros disponibles")
     @ApiResponse(
             responseCode = "200",
             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Book.class)))
@@ -75,7 +75,7 @@ public class BooksController {
     @Operation(
             operationId = "getBookById",
             description = "Obtiene un libro por su ID",
-            summary = "Get book by ID")
+            summary = "obtiene un libro por su correspondiente numero de identificacion")
     @ApiResponse(
             responseCode = "200",
             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Book.class)))
@@ -97,7 +97,7 @@ public class BooksController {
     @Operation(
             operationId = "createBook",
             description = "Crea un nuevo libro",
-            summary = "Create a new book")
+            summary = "Crea un nuevo libro ")
     @ApiResponse(
             responseCode = "201",
             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Book.class)))
@@ -195,7 +195,7 @@ public class BooksController {
     @Operation(
         operationId = "createReview",
         description = "Crea una nueva reseña para un libro",
-        summary = "Create a new review for a book")
+        summary = "crea un reseña de un libro que luego servira como calculo para la informacion del libro")
     @ApiResponse(
         responseCode = "201",
         content = @Content(mediaType = "application/json", schema = @Schema(implementation = Review.class)))

@@ -13,8 +13,14 @@ import java.util.List;
 @Slf4j
 public class EditorialServiceImpl implements EditorialService {
 
+
+    private final EditorialRepository editorialRepository;
+
     @Autowired
-    private  EditorialRepository editorialRepository;
+    public EditorialServiceImpl(EditorialRepository editorialRepository) {
+        this.editorialRepository = editorialRepository;
+    }
+
 
     @Override
     public List<Editorial> getEditorials() {
