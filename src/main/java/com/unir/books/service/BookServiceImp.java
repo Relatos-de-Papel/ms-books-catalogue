@@ -127,10 +127,7 @@ public class BookServiceImp implements  BooksService{
     @Override
     public Book updateBook(Long bookId, BookDto updateRequest) {
         Book book = repository.getById(bookId);
-        
-       
-       
-       
+
                if (book != null) {
                 var bookToSave = bookDtoToBook(book,updateRequest);
                    return repository.save(bookToSave);
@@ -139,8 +136,7 @@ public class BookServiceImp implements  BooksService{
                }
            }
        
-           private Book bookDtoToBook(Book book,BookDto updateRequest) {
-
+    private Book bookDtoToBook(Book book,BookDto updateRequest) {
                book.setName(updateRequest.getName());
                 book.setAuthor(authorService.getAuthorById(updateRequest.getAuthorId()));
                 book.setCategory(categoryService.getCategoryById(updateRequest.getCategoryId()));
@@ -151,7 +147,6 @@ public class BookServiceImp implements  BooksService{
                 book.setDatePublished(updateRequest.getDatePublished());
                 book.setType(updateRequest.getType());
                 return book;
-
            }
        
            @Override
