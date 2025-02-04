@@ -1,6 +1,7 @@
 package com.unir.books.data;
 
 import com.unir.books.data.model.Book;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -17,5 +18,8 @@ interface BookJpaRepository  extends JpaRepository<Book, Long>, JpaSpecification
     List<Book> findByISBN(String ISBN);
 
     List<Book> findByVisible(boolean visible);
+
+
+    
 
 }

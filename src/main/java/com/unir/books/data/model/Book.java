@@ -60,7 +60,7 @@ public class Book {
     private Date datePublished;
 
     @Column(name ="ranking")
-    private Integer ranking;
+    private Double ranking;
 
     @Column(name ="type")
     private String type;

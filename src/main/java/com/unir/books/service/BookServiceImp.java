@@ -9,6 +9,7 @@ import com.unir.books.controller.model.BookDto;
 import com.unir.books.controller.model.CreateBookRequest;
 import com.unir.books.data.BookRepository;
 import com.unir.books.data.model.Book;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -163,5 +164,7 @@ public class BookServiceImp implements  BooksService{
         book.setVisible(visible);
         repository.save(book);
     }
+
+      
 
 }

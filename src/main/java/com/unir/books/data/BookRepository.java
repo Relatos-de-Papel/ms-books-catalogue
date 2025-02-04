@@ -22,8 +22,22 @@ public class BookRepository {
     }
 
     public Book getById(Long id) {
-        return repository.findById(id).orElse(null);
+        var book =  repository.findById(id).orElse(null);
+
+        if (book != null) {
+            double averageRank = book.getReviews().stream()
+                                      .mapToDouble(review -> review.getRank())
+                                      .average()
+                                      .orElse(0.0);
+            book.setRanking(averageRank);
+            return book;
+            
+        }
+        return null;
+
     }
+
+   
 
     public Book save(Book book) {
         return repository.save(book);
@@ -64,5 +78,6 @@ public class BookRepository {
 
         return repository.findAll(spec);
     }
+
 
 }

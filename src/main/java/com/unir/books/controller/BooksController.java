@@ -4,7 +4,10 @@ package com.unir.books.controller;
 import com.unir.books.controller.model.BookDto;
 import com.unir.books.controller.model.CreateBookRequest;
 import com.unir.books.data.model.Book;
+import com.unir.books.data.model.Review;
 import com.unir.books.service.BooksService;
+import com.unir.books.service.ReviewService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -35,6 +38,7 @@ import java.util.Map;
 public class BooksController {
 
     private final BooksService service;
+    private final ReviewService reviewService;
 
     @GetMapping("/books")
     @Operation(
@@ -161,6 +165,55 @@ public class BooksController {
             return ResponseEntity.ok(patchedBook);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/books/{bookId}/reviews")
+    @Operation(
+        operationId = "getBookReviews",
+        description = "Obtiene las reseñas de un libro por su ID",
+        summary = "Get book reviews by ID")
+    @ApiResponse(
+        responseCode = "200",
+        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Review.class)))
+    @ApiResponse(
+        responseCode = "404",
+        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Void.class)),
+        description = "Book not found")
+    public ResponseEntity<List<Review>> getBookReviews(@PathVariable("bookId") Long bookId) {
+
+        List<Review> reviews = reviewService.getBookReviews(bookId);
+
+        if (reviews != null && !reviews.isEmpty()) {
+            return ResponseEntity.ok(reviews);
+        } else {
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+    }
+
+    @PostMapping("/books/{bookId}/reviews")
+    @Operation(
+        operationId = "createReview",
+        description = "Crea una nueva reseña para un libro",
+        summary = "Create a new review for a book")
+    @ApiResponse(
+        responseCode = "201",
+        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Review.class)))
+    @ApiResponse(
+        responseCode = "400",
+        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Void.class)),
+        description = "Invalid input")
+    public ResponseEntity<Review> createReview(
+        @PathVariable("bookId") Long bookId,
+        @RequestBody Review review) {
+        
+        var book = service.getBook(bookId);
+        review.setBook(book);
+        Review createdReview = reviewService.createReview(review);
+        if (createdReview != null) {
+            return ResponseEntity.status(201).body(createdReview);
+        } else {
+            return ResponseEntity.badRequest().build();
         }
     }
 

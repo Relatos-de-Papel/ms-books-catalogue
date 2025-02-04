@@ -25,4 +25,6 @@ public interface BooksService {
     Book updateBook(Long bookId, BookDto updateRequest);
 
     void updateBookVisibility(String bookId, boolean visible);
+
+
 }

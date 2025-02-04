@@ -20,7 +20,7 @@ public class Review {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "book_Id", insertable = false, updatable = false)
+    @JoinColumn(name = "book_Id", insertable = true, updatable = true)
     @JsonBackReference
     private Book book;
 
@@ -31,7 +31,7 @@ public class Review {
     private String review;
 
     @Column(name ="rank")
-    private String rank;
+    private Double rank;
 }
 
 
