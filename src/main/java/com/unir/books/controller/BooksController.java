@@ -37,7 +37,7 @@ import java.util.Map;
 @Tag(name = "books Controller", description = "Microservicio encargado de exponer operaciones CRUD los libros")
 public class BooksController {
 
-    private final BooksService service;
+    private final BooksService bookService;
     private final ReviewService reviewService;
 
     @GetMapping("/books")
@@ -62,7 +62,7 @@ public class BooksController {
             @RequestParam(required = false) Integer ranking
 
     ) {
-        List<Book> books = service.getBooks( title, author, category, isbn,datePublished,ranking);
+        List<Book> books = bookService.getBooks( title, author, category, isbn,datePublished,ranking);
 
         if (books != null && !books.isEmpty()) {
             return ResponseEntity.ok(books);
@@ -84,7 +84,7 @@ public class BooksController {
             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Void.class)),
             description = "Book not found")
     public ResponseEntity<Book> getBookById(@PathVariable("bookId") Long bookId) {
-        Book book = service.getBook(bookId);
+        Book book = bookService.getBook(bookId);
 
         if (book != null) {
             return ResponseEntity.ok(book);
@@ -106,7 +106,7 @@ public class BooksController {
             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Void.class)),
             description = "Invalid input")
     public ResponseEntity<Book> createBook(@RequestBody CreateBookRequest book) {
-        Book createdBook = service.createBook(book);
+        Book createdBook = bookService.createBook(book);
         if (createdBook != null) {
             return ResponseEntity.status(201).body(createdBook);
         } else {
@@ -133,7 +133,7 @@ public class BooksController {
     public ResponseEntity<Book> updateBook(
         @PathVariable("bookId") Long bookId,
         @RequestBody BookDto book) {
-        Book updatedBook = service.updateBook(bookId, book);
+        Book updatedBook = bookService.updateBook(bookId, book);
         if (updatedBook != null) {
         return ResponseEntity.ok(updatedBook);
         } else {
@@ -160,7 +160,7 @@ public class BooksController {
     public ResponseEntity<Book> patchBook(
         @PathVariable("bookId") Long bookId,
         @RequestBody  String patchBody) {
-        Book patchedBook = service.updateBook(bookId, patchBody);
+        Book patchedBook = bookService.updateBook(bookId, patchBody);
         if (patchedBook != null) {
             return ResponseEntity.ok(patchedBook);
         } else {
@@ -207,7 +207,7 @@ public class BooksController {
         @PathVariable("bookId") Long bookId,
         @RequestBody Review review) {
         
-        var book = service.getBook(bookId);
+        var book = bookService.getBook(bookId);
         review.setBook(book);
         Review createdReview = reviewService.createReview(review);
         if (createdReview != null) {
