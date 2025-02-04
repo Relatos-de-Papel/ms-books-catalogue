@@ -4,7 +4,6 @@ package com.unir.books.controller;
 import com.unir.books.controller.model.BookDto;
 import com.unir.books.controller.model.CreateBookRequest;
 import com.unir.books.data.model.Book;
-import com.unir.books.data.model.Product;
 import com.unir.books.service.BooksService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -44,7 +43,7 @@ public class BooksController {
             summary = "Get all books")
     @ApiResponse(
             responseCode = "200",
-            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class)))
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Book.class)))
     @ApiResponse(
             responseCode = "404",
             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Void.class)),
