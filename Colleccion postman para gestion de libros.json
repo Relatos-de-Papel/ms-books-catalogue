@@ -71,6 +71,44 @@
 			"response": []
 		},
 		{
+			"name": "get book Reviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add book review",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "create a book",
 			"request": {
 				"method": "POST",
@@ -128,7 +166,7 @@
 			"response": []
 		},
 		{
-			"name": "Update a book Copy",
+			"name": "Update a book partial",
 			"request": {
 				"method": "PUT",
 				"header": [],
