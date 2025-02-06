@@ -8,9 +8,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.unir</groupId>
-	<artifactId>ms.books-catalogue</artifactId>
+	<artifactId>catalogue</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>books</name>
+	<name>catalogue</name>
 	<description>Aplicación que gestiona los libros de una tienda</description>
 	<properties>
 		<java.version>21</java.version>
